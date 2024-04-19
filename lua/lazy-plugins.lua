@@ -25,109 +25,37 @@ require('lazy').setup({
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
+  -- Git integration into nvim
   -- See `:help gitsigns` to understand what the configuration keys do
   require 'kickstart.plugins.gitsigns',
 
+  -- Offers keybindings for the command you started
+  -- For example <Leader> (telescope)
   require 'kickstart.plugins.which-key',
 
+  -- Fuzzy search, improved c version
   require 'kickstart.plugins.telescope-fzf',
 
+  -- Runs the lsps needed for the autocomplete of the cmp module
   require 'kickstart.plugins.lspconfig',
 
+  -- Autoformat
   require 'kickstart.plugins.conform',
 
+  -- Autocomplete
   require 'kickstart.plugins.cmp',
 
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    init = function()
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
-
-      -- You can configure highlights by doing something like:
-      vim.cmd.hi 'Comment gui=none'
-    end,
-  },
+  -- Theme
+  require 'kickstart.plugins.tokyonight',
 
   -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  require 'kickstart.plugins.todo-comments',
 
-  { -- Collection of various small independent plugins/modules
-    'echasnovski/mini.nvim',
-    config = function()
-      -- Better Around/Inside textobjects
-      --
-      -- Examples:
-      --  - va)  - [V]isually select [A]round [)]paren
-      --  - yinq - [Y]ank [I]nside [N]ext [']quote
-      --  - ci'  - [C]hange [I]nside [']quote
-      require('mini.ai').setup { n_lines = 500 }
+  -- Collection of various small independent plugins/modules
+  require 'kickstart.plugins.mini',
 
-      -- Add/delete/replace surroundings (brackets, quotes, etc.)
-      --
-      -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-      -- - sd'   - [S]urround [D]elete [']quotes
-      -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup()
-
-      -- Simple and easy statusline.
-      --  You could remove this setup call if you don't like it,
-      --  and try some other statusline plugin
-      local statusline = require 'mini.statusline'
-      -- set use_icons to true if you have a Nerd Font
-      statusline.setup { use_icons = vim.g.have_nerd_font }
-
-      -- You can configure sections in the statusline by overriding their
-      -- default behavior. For example, here we set the section for
-      -- cursor location to LINE:COLUMN
-      ---@diagnostic disable-next-line: duplicate-set-field
-      statusline.section_location = function()
-        return '%2l:%-2v'
-      end
-
-      -- ... and there is more!
-      --  Check out: https://github.com/echasnovski/mini.nvim
-    end,
-  },
-  { -- Highlight, edit, and navigate code
-    'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
-    opts = {
-      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
-      -- Autoinstall languages that are not installed
-      auto_install = true,
-      highlight = {
-        enable = true,
-        -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-        --  If you are experiencing weird indenting issues, add the language to
-        --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        additional_vim_regex_highlighting = { 'ruby' },
-      },
-      indent = { enable = true, disable = { 'ruby' } },
-    },
-    config = function(_, opts)
-      -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-
-      -- Prefer git instead of curl in order to improve connectivity in some environments
-      require('nvim-treesitter.install').prefer_git = true
-      ---@diagnostic disable-next-line: missing-fields
-      require('nvim-treesitter.configs').setup(opts)
-
-      -- There are additional nvim-treesitter modules that you can use to interact
-      -- with nvim-treesitter. You should go explore a few and see what interests you:
-      --
-      --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-      --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-      --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
-    end,
-  },
+  -- Highlight, edit, and navigate code
+  require 'kickstart.plugins.treesitter',
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
@@ -143,14 +71,13 @@ require('lazy').setup({
   -- require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
