@@ -5,8 +5,8 @@
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Set keymap for folder mode
-vim.keymap.set('n', '<leader>F', vim.cmd.Ex, { desc = 'Go into [F]ile system mode' })
+-- Set keymap for netrw
+vim.keymap.set('n', '<leader>F', vim.cmd.Ex, { desc = '[F]ile system mode' })
 
 -- Set move marked lines
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
