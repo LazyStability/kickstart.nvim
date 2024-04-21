@@ -84,13 +84,15 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
+-- Load basic options
 require 'options'
+
 -- Load basic keymaps
-
 require 'keymaps'
--- [[ Install `lazy.nvim` plugin manager ]]
 
+-- [[ Install `lazy.nvim` plugin manager ]]
 require 'lazy-bootstrap'
+
 -- [[ Configure and install plugins ]]
 require 'lazy-plugins'
 
