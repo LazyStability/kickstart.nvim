@@ -66,6 +66,9 @@ require('lazy').setup({
   -- Gitintegration newer lua version
   require 'custom.plugins.neogit',
 
+  -- Vimtex like gilles castel
+  require 'custom.plugins.vimtex',
+
   -- Old tried and true method
   -- require 'custom.plugins.fugitive',
 
