@@ -60,10 +60,16 @@ require('lazy').setup({
   -- Game to learn vim motions
   require 'custom.plugins.vimbegood',
 
-   -- Shows the history of changes to the file, enabling us to select our undo
+  -- Shows the history of changes to the file, enabling us to select our undo
   require 'custom.plugins.undotree',
 
- -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
+  -- Gitintegration newer lua version
+  require 'custom.plugins.neogit',
+
+  -- Old tried and true method
+  -- require 'custom.plugins.fugitive',
+
+  -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- place them in the correct locations.
 
