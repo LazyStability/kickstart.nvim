@@ -29,9 +29,6 @@ require('lazy').setup({
   -- See `:help gitsigns` to understand what the configuration keys do
   require 'kickstart.plugins.gitsigns',
 
-  -- Shows the history of changes to the file, enabling us to select our undo
-  require 'kickstart.plugins.undotree',
-
   -- Offers keybindings for the command you started
   -- For example <Leader> (telescope)
   require 'kickstart.plugins.which-key',
@@ -60,7 +57,13 @@ require('lazy').setup({
   -- Highlight, edit, and navigate code
   require 'kickstart.plugins.treesitter',
 
-  -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
+  -- Game to learn vim motions
+  require 'custom.plugins.vimbegood',
+
+   -- Shows the history of changes to the file, enabling us to select our undo
+  require 'custom.plugins.undotree',
+
+ -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- place them in the correct locations.
 
