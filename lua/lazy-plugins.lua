@@ -69,6 +69,9 @@ require('lazy').setup({
   -- Vimtex like gilles castel
   require 'custom.plugins.vimtex',
 
+  -- Try out obsidian.nvim
+  require 'custom.plugins.obsidian',
+
   -- Old tried and true method
   -- require 'custom.plugins.fugitive',
 
