@@ -7,5 +7,10 @@ return {
     -- Only one of these is needed, not both.
     'nvim-telescope/telescope.nvim', -- optional
   },
-  config = true,
+  config = function()
+    require('neogit').setup {
+      integrations = { diffview = true },
+      vim.keymap.set('n', '<leader>hn', '<cmd>Neogit<cr>', { desc = 'open [n]eogit' }),
+    }
+  end,
 }
