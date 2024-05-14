@@ -20,15 +20,15 @@ local skeletons = vim.api.nvim_create_augroup('skeletons', { clear = true })
 vim.api.nvim_create_autocmd('BufNewFile', {
   pattern = '*.tex',
   group = skeletons,
-  command = 'r ~/Dokumente/Skeleton_files/LaTex/Root.tex',
+  command = '0r ~/Dokumente/Skeleton_files/LaTex/Root.tex',
 })
 vim.api.nvim_create_autocmd('BufNewFile', {
   pattern = '*.h',
   group = skeletons,
-  command = 'r ~/Dokumente/Skeleton_files/cpp/basic_header.h',
+  command = '0r ~/Dokumente/Skeleton_files/cpp/basic_header.h',
 })
 vim.api.nvim_create_autocmd('BufNewFile', {
   pattern = '*.cpp',
   group = skeletons,
-  command = 'r ~/Dokumente/Skeleton_files/cpp/basic_source_file.cpp',
+  command = '0r ~/Dokumente/Skeleton_files/cpp/basic_source_file.cpp',
 })
