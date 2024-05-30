@@ -169,10 +169,6 @@ return { -- LSP Configuration & Plugins
       -- tsserver = {},
       --
 
-      -- ltex = {
-      --   cmd = { 'ltex-ls' },
-      --   filetypes = { 'bib', 'gitcommit', 'markdown', 'org', 'plaintex', 'rst', 'rnoweb', 'tex', 'pandoc', 'quarto', 'rmd', 'context', 'html', 'xhtml' },
-      -- },
       texlab = {},
 
       lua_ls = {
