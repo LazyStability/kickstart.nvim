@@ -39,6 +39,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
     end
 
+    local map_with_arguments = function(keys, func, desc, args)
+      vim.keymap.set('n', keys, function()
+        func(args)
+      end, { buffer = event.buf, desc = 'LSP: ' .. desc })
+    end
+
     -- Jump to the definition of the word under your cursor.
     --  This is where a variable was first declared, or where a function is defined, etc.
     --  To jump back, press <C-t>.
@@ -58,7 +64,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- Fuzzy find all the symbols in your current document.
     --  Symbols are things like variables, functions, types, etc.
-    map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+    -- Define the map function with support for arguments
+
+    map_with_arguments('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols', { fname_width = 0.5, symbol_width = 0.75 })
+    -- map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
 
     -- Fuzzy find all the symbols in your current workspace.
     --  Similar to document symbols, except searches over your entire project.
