@@ -11,6 +11,10 @@ return { -- You can easily change to a different colorscheme.
     -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
     vim.cmd.colorscheme 'tokyonight-night'
 
+    -- Make the window transpartent
+    -- vim.api.nvim_set_h1(0, 'Normal', { bg = 'none' })
+    -- vim.api.nvim_set_h1(0, 'NormalFloat', { bg = 'none' })
+
     -- You can configure highlights by doing something like:
     vim.cmd.hi 'Comment gui=none'
   end,

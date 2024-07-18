@@ -71,7 +71,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- Fuzzy find all the symbols in your current workspace.
     --  Similar to document symbols, except searches over your entire project.
-    map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+    map_with_arguments(
+      '<leader>ws',
+      require('telescope.builtin').lsp_dynamic_workspace_symbols,
+      '[W]orkspace [S]ymbols',
+      { fname_width = 0.5, symbol_width = 0.5 }
+    )
 
     -- Rename the variable under your cursor.
     --  Most Language Servers support renaming across files, etc.
@@ -159,9 +164,10 @@ local servers = {
   --
   -- But for many setups, the LSP (`tsserver`) will work just fine
   -- tsserver = {},
-  --
 
   texlab = {},
+  nil_ls = {},
+  -- eslint = {},
 
   lua_ls = {
     -- cmd = {...},
