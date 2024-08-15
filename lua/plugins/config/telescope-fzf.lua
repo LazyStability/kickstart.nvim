@@ -25,16 +25,16 @@ M.config = function()
     -- You can put your default mappings / updates / etc. in here
     --  All the info you're looking for is in `:help telescope.setup()`
     --
-    defaults = {
-      layout_strategy = 'vertical',
-      layout_config = {
-        preview_height = 0.7,
-      },
-      --   mappings = {
-      --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-      --   },
-      -- file_ignore_patterns = { '^./.git/', '^node_modules/', '^vendor/', '%.jpg', '%.mp4', '%.webp', '%.png' },
-    },
+    -- defaults = {
+    --   layout_strategy = 'vertical',
+    --   layout_config = {
+    --     preview_height = 0.7,
+    --   },
+    --   mappings = {
+    --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+    --   },
+    -- file_ignore_patterns = { '^./.git/', '^node_modules/', '^vendor/', '%.jpg', '%.mp4', '%.webp', '%.png' },
+    -- },
     -- pickers = {}
     extensions = {
       ['ui-select'] = {

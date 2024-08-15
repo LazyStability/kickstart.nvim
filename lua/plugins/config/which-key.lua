@@ -1,13 +1,21 @@
 require('which-key').setup()
 
 -- Document existing key chains
-require('which-key').register {
-  ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-  ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-  ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-  ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-  ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-  ['<leader>t'] = { name = 'vim[t]ex', _ = 'which_key_ignore' },
-  ['<leader>ht'] = { name = '[t]oggle diff/blame line', _ = 'which_key_ignore' },
-  ['<leader>h'] = { name = 'git [h]ub', _ = 'which_key_ignore' },
+require('which-key').add {
+  { '<leader>c', group = '[C]ode' },
+  { '<leader>c_', hidden = true },
+  { '<leader>d', group = '[D]ocument' },
+  { '<leader>d_', hidden = true },
+  { '<leader>h', group = 'git [h]ub' },
+  { '<leader>h_', hidden = true },
+  { '<leader>ht', group = '[t]oggle diff/blame line' },
+  { '<leader>ht_', hidden = true },
+  { '<leader>r', group = '[R]ename' },
+  { '<leader>r_', hidden = true },
+  { '<leader>s', group = '[S]earch' },
+  { '<leader>s_', hidden = true },
+  { '<leader>t', group = 'vim[t]ex' },
+  { '<leader>t_', hidden = true },
+  { '<leader>w', group = '[W]orkspace' },
+  { '<leader>w_', hidden = true },
 }
