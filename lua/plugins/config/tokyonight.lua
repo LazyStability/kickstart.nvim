@@ -7,6 +7,8 @@ M.init = function()
     -- Like many other themes, this one has different styles, and you could load
     -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
     style = 'moon',
+    on_highlights = function(highlights, colors) end,
+    on_colors = function(colors) end,
     transparent = true, -- Enable this to disable setting the background color
     terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
     styles = {
@@ -20,13 +22,6 @@ M.init = function()
     },
   }
   vim.cmd.colorscheme 'tokyonight'
-
-  -- Make the window transpartent
-  -- vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' }),
-  -- vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' }),
-
-  -- You can configure highlights by doing something like:
-  -- vim.cmd.hi 'Comment gui=none',
 end
 M.init()
 return M
