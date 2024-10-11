@@ -8,9 +8,6 @@ return {
     'nvim-telescope/telescope.nvim', -- optional
   },
   config = function()
-    require('neogit').setup {
-      integrations = { diffview = true },
-      vim.keymap.set('n', '<leader>hn', '<cmd>Neogit<cr>', { desc = 'open [n]eogit' }),
-    }
+    require 'plugins.config.neogit'
   end,
 }
