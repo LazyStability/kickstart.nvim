@@ -169,7 +169,16 @@ local servers = {
   ts_ls = {},
 
   texlab = {},
-  nil_ls = {},
+  nil_ls = {
+    -- autostart = true,
+    -- capabilities = capabilities,
+    -- cmd = {},
+    -- settings = {
+    -- ['nil'] = {
+    --   flake = { autoEvalInputs = true },
+    -- },
+    -- },
+  },
   eslint = {},
   lua_ls = {
     -- cmd = {...},
