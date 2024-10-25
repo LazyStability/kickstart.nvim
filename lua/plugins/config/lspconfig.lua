@@ -169,15 +169,46 @@ local servers = {
   ts_ls = {},
 
   texlab = {},
-  nil_ls = {
-    -- autostart = true,
-    -- capabilities = capabilities,
-    -- cmd = {},
-    -- settings = {
-    -- ['nil'] = {
-    --   flake = { autoEvalInputs = true },
-    -- },
-    -- },
+  -- nil_ls = {
+  --   autostart = true,
+  --   capabilities = capabilities,
+  --   settings = {
+  --     ['nil'] = {
+  --       formatting = {
+  --         command = { 'alejandra' },
+  --       },
+  --       nix = {
+  --         binary = 'nix',
+  --         maxMemoryMB = 16000,
+  --         flake = {
+  --           autoArchive = nil,
+  --           autoEvalInputs = true,
+  --           nixpkgsInputName = 'nixpkgs',
+  --         },
+  --       },
+  --     },
+  --   },
+  -- },
+  nixd = {
+    cmd = { 'nixd' },
+    settings = {
+      nixd = {
+        nixpkgs = {
+          expr = 'import <nixpkgs> { }',
+        },
+        formatting = {
+          command = { 'alejandra' }, -- or nixfmt or nixpkgs-fmt
+        },
+        nixos = {
+          options = {
+            expr = '(builtins.getFlake (builtins.getEnv "FLAKE")).nixosConfigurations.Kronos.options',
+          },
+          home_manager = {
+            expr = '(builtins.getFlake (builtins.getEnv "FLAKE")).homeConfigurations.me.options',
+          },
+        },
+      },
+    },
   },
   eslint = {},
   lua_ls = {
