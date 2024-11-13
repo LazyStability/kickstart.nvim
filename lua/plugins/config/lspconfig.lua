@@ -199,12 +199,12 @@ local servers = {
         formatting = {
           command = { 'alejandra' }, -- or nixfmt or nixpkgs-fmt
         },
-        nixos = {
-          options = {
-            expr = '(builtins.getFlake (builtins.getEnv "FLAKE")).nixosConfigurations.Kronos.options',
+        options = {
+          nixos = {
+            expr = '(builtins.getFlake (builtins.getEnv "FLAKE")).nixosConfigurations."Kronos".options',
           },
           home_manager = {
-            expr = '(builtins.getFlake (builtins.getEnv "FLAKE")).homeConfigurations.me.options',
+            expr = '(builtins.getFlake (builtins.getEnv "FLAKE")).homeConfigurations."me".options',
           },
         },
       },
