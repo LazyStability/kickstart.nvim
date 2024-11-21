@@ -4,6 +4,7 @@ return { -- Highlight, edit, and navigate code
   opts = {
     ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown_inline', 'markdown', 'vim', 'vimdoc', 'cpp' },
     -- Autoinstall languages that are not installed
+    event = 'BufReadPost',
     auto_install = true,
     highlight = {
       enable = true,
