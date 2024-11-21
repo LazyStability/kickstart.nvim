@@ -20,6 +20,7 @@ return { -- Highlight, edit, and navigate code
       'gitignore',
     },
     -- Autoinstall languages that are not installed
+    event = 'BufReadPost',
     auto_install = true,
     highlight = {
       enable = true,

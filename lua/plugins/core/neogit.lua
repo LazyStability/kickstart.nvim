@@ -7,6 +7,7 @@ return {
     -- Only one of these is needed, not both.
     'nvim-telescope/telescope.nvim', -- optional
   },
+  event = 'VeryLazy',
   config = function()
     require('neogit').setup {
       integrations = { diffview = true },
