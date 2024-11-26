@@ -43,6 +43,10 @@ require('lazy').setup({ import = 'plugins/core' }, {
       },
     },
   },
+  dev = {
+    path = '~/.local/share/nvim/nix',
+    fallback = false,
+  },
 })
 -- vim: ts=2 sts=2 sw=2 et
 -- -- The line beneath this is called `modeline`. See `:help modeline`
