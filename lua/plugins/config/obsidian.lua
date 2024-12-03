@@ -9,10 +9,7 @@ M.init = function()
           daily_notes = {
             folder = 'Tagebuch/Täglich/thisYear',
             date_format = '%Y-%m-%d',
-            template = nil,
-          },
-          attachments = {
-            img_folder = 'Attachments',
+            template = 'Templates/Tagebuch/Täglicher_Eintrag_Template',
           },
         },
       },
@@ -128,6 +125,14 @@ M.init = function()
 
       return out
     end,
+    attachments = {
+      img_folder = 'Attachments',
+      img_text_func = function(client, path)
+        path = client:vault_relative_path(path) or path
+        return string.format('![%s](%s)', path.name, path)
+      end,
+      confirm_img_paste = true,
+    },
   }
 end
 M.init()
