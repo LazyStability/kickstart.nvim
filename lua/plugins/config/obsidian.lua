@@ -9,7 +9,7 @@ M.init = function()
           daily_notes = {
             folder = 'Tagebuch/Täglich/thisYear',
             date_format = '%Y-%m-%d',
-            template = 'Templates/Tagebuch/Täglicher_Eintrag_Template',
+            template = 'Templates/Tagebuch/Täglicher_Eintrag_Template.md',
           },
         },
       },
@@ -119,7 +119,7 @@ M.init = function()
     note_frontmatter_func = function(note)
       -- Add the title of the note as an alias.
       if note.title then
-        note:add_alias(note.title)
+        -- note:add_alias(note.title)
         note:add_alias('󱞁' .. note.title)
       end
 
@@ -135,6 +135,21 @@ M.init = function()
 
       return out
     end,
+    templates = {
+      folder = 'Templates',
+      date_format = '%Y-%m-%d',
+      time_format = '%H:%M',
+      -- A map for custom variables, the key should be the variable and the value a function
+      substitutions = {
+        Topic = function()
+          -- require 'telescope' {
+          --   function()
+          --     builtin.find_files { cwd = 'MOCs' }
+          --   end,
+          -- }
+        end,
+      },
+    },
     attachments = {
       img_folder = 'Attachments',
       img_text_func = function(client, path)
