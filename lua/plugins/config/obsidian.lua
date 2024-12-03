@@ -123,7 +123,7 @@ M.init = function()
         note:add_alias('󱞁' .. note.title)
       end
 
-      local out = { aliases = note.aliases, tags = note.tags, date = os.date '%Y-%m-%d' }
+      local out = { aliases = note.aliases, tags = note.tags, Datum = os.date '%Y-%m-%d' }
 
       -- `note.metadata` contains any manually added fields in the frontmatter.
       -- So here we just make sure those fields are kept in the frontmatter.
