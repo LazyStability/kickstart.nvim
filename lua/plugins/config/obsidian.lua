@@ -119,11 +119,11 @@ M.init = function()
     note_frontmatter_func = function(note)
       -- Add the title of the note as an alias.
       if note.title then
-        -- note:add_alias(note.title)
+        note:add_alias(note.title)
         note:add_alias('󱞁' .. note.title)
       end
 
-      local out = { aliases = note.aliases, tags = note.tags, Datum = os.date '%Y-%m-%d' }
+      local out = { id = note.id, title = note.title, aliases = note.aliases, tags = note.tags, date = os.date '%Y-%m-%d' }
 
       -- `note.metadata` contains any manually added fields in the frontmatter.
       -- So here we just make sure those fields are kept in the frontmatter.
@@ -141,13 +141,10 @@ M.init = function()
       time_format = '%H:%M',
       -- A map for custom variables, the key should be the variable and the value a function
       substitutions = {
-        Topic = function()
-          -- require 'telescope' {
-          --   function()
-          --     builtin.find_files { cwd = 'MOCs' }
-          --   end,
-          -- }
-        end,
+        -- Topic = function(client)
+        --   local picker = client:picker()
+        --   picker.findFiles
+        -- end,
       },
     },
     attachments = {
