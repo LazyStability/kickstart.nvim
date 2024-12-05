@@ -1,6 +1,6 @@
 return {
   'nvim-treesitter/nvim-treesitter-context',
-  dependencies = { require 'plugins.core.treesitter' },
+  dependencies = { 'nvim-treesitter/nvim-treesitter' },
   event = 'VeryLazy',
   opts = {},
 }
