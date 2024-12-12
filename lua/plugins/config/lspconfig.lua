@@ -203,9 +203,9 @@ local servers = {
           nixos = {
             expr = '(builtins.getFlake (builtins.getEnv "FLAKE")).nixosConfigurations."Kronos".options',
           },
-          home_manager = {
-            expr = '(builtins.getFlake (builtins.getEnv "FLAKE")).homeConfigurations."me".options',
-          },
+          -- home_manager = {
+          --   expr = '(builtins.getFlake (builtins.getEnv "FLAKE")).homeConfigurations."me".options',
+          -- },
         },
       },
     },
