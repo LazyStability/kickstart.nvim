@@ -222,6 +222,12 @@ local servers = {
       },
     },
   },
+  tinymist = {
+    settings = {
+      exportPdf = 'onType',
+      outputPath = '$root/target/$dir/$name',
+    },
+  },
 }
 
 -- Initialise all servers in the list

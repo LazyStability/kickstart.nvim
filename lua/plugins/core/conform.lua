@@ -28,6 +28,7 @@ return { -- Autoformat
       lua = { 'stylua' },
       nix = { 'alejandra' },
       go = { 'gofmnt' },
+      typst = { 'typstyle' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
       --
