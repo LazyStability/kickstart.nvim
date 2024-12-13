@@ -223,7 +223,12 @@ local servers = {
     },
   },
   tinymist = {
+    offset_encoding = 'utf-8',
     settings = {
+      -- single_file_support = true,
+      -- root_dir = function(_, bufnr)
+      --   return vim.fs.root(bufnr, { '.git' }) or vim.fn.expand '%:p:h'
+      -- end,
       exportPdf = 'onType',
       outputPath = '$root/target/$dir/$name',
     },
