@@ -1,5 +1,7 @@
 return {
   'epwalsh/obsidian.nvim',
+  dev = true,
+  dir = '/home/hagen/Software/obsidian.nvim',
   version = '*', -- recommended, use latest release instead of latest commit
   lazy = true,
   ft = 'markdown',
