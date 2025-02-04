@@ -29,6 +29,7 @@ return { -- Autoformat
       nix = { 'alejandra' },
       go = { 'gofmnt' },
       typst = { 'typstyle' },
+      cpp = { 'clang-format' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
       --
