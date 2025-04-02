@@ -5,6 +5,9 @@
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+-- Save without quiting similiar to ZZ and ZQ
+vim.keymap.set('n', 'ZH', ':w<cr>')
+
 -- Set keymap for netrw
 vim.keymap.set('n', '<leader>F', vim.cmd.Ex, { desc = '[F]ile system mode' })
 
