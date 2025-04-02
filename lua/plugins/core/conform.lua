@@ -26,7 +26,7 @@ return { -- Autoformat
     end,
     formatters_by_ft = {
       lua = { 'stylua' },
-      nix = { 'alejandra' },
+      nix = { 'nixfmt' },
       go = { 'gofmnt' },
       typst = { 'typstyle' },
       cpp = { 'clang-format' },
