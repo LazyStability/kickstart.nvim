@@ -240,5 +240,9 @@ for server_name in next, servers do
   local server = servers[server_name] or {}
   server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
   -- server.on_attach = vim.tbl_deep_extend('force', {}, on_attach, server.on_attach or {})
-  require('lspconfig')[server_name].setup(server)
+  vim.lsp.enable(server_name)
+  for name, config in pairs(servers) do
+    vim.lsp.config(name, config)
+  end
+  -- require('lspconfig')[server_name].setup(server)
 end
