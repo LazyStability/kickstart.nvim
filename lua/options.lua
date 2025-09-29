@@ -31,6 +31,7 @@ vim.opt.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.opt.breakindent = true
+vim.g.editorconfig = true
 
 -- Save undo history
 vim.opt.undofile = true
@@ -75,6 +76,7 @@ vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.o.foldmethod = 'expr'
 vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()' -- Use treesitter for folding
+vim.opt.foldtext = require 'modules.foldtext'
 
 -- line numbers in Netrw
 vim.cmd [[let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro']]
