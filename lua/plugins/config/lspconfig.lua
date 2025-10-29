@@ -157,7 +157,7 @@ local servers = {
     cmd = { 'clangd', '--query-driver=C:/ProgramData/mingw64/mingw64/bin/c++.exe' },
   },
   gopls = {},
-  pyright = {},
+  basedpyright = {},
   bashls = {},
   rust_analyzer = {},
   --... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
