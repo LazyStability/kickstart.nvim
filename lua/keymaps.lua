@@ -10,6 +10,7 @@ vim.keymap.set('n', 'ZH', ':w<cr>')
 
 -- Set keymap for netrw
 vim.keymap.set('n', '<leader>F', vim.cmd.Ex, { desc = '[F]ile system mode' })
+-- vim.keymap.set('n', '<leader>s', ':find ', { desc = '[s]earch file' })
 
 -- Set move marked lines
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
@@ -20,6 +21,22 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
+-- Copy & cut to system clipboard
+-- vim.keymap.set('n', '<leader>y', '"+y')
+-- vim.keymap.set('v', '<leader>y', '"+y')
+-- vim.keymap.set('n', '<leader>Y', '"+Y')
+-- vim.keymap.set('n', '<leader>d', '"_d')
+-- vim.keymap.set('v', '<leader>d', '"_d')
+
+-- Navigate quickfix list
+vim.keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz', { desc = '[p]revious item in the quickfix list' })
+vim.keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz', { desc = '[n]ext item in the quickfix list' })
+vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz', { desc = 'next item in the location list' })
+vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz', { desc = 'previous item in the location list' })
+
+-- Replace current word in whole file
+vim.keymap.set('n', '<leader>r', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = '[r]eplace current hovered word in whole file' })
 
 -- Quality of life changes
 -- Centering after down a page
@@ -42,15 +59,15 @@ vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---
---  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<CS-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<CS-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<CS-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<CS-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+-- Better indenting in visual mode
+vim.keymap.set('v', '<', '<gv', { desc = 'Indent left and reselect' })
+vim.keymap.set('v', '>', '>gv', { desc = 'Indent right and reselect' })
 
--- removed the autocommands here and put them into their own file
+-- Copy Full File-Path
+vim.keymap.set('n', '<leader>pa', function()
+  local path = vim.fn.expand '%:p'
+  vim.fn.setreg('+', path)
+  print('file:', path)
+end, { desc = 'copy current file path' })
 
 -- vim: ts=2 sts=2 sw=2 et
