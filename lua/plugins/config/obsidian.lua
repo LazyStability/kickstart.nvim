@@ -86,7 +86,7 @@ M.init = function()
       enable = false, -- set to false to disable all additional syntax features
     },
     callbacks = {
-      enter_note = function(_, note)
+      enter_note = function(note)
         vim.keymap.set('n', '<leader>oc', '<cmd>Obsidian toggle_checkbox<cr>', {
           buffer = note.bufnr,
           desc = 'Toggle checkbox',
@@ -117,25 +117,27 @@ M.init = function()
       vim.ui.open(url) -- need Neovim 0.10.0+
     end,
     -- how default frontmatter is generated
-    note_frontmatter_func = function(note)
-      -- Add the title of the note as an alias.
-      if note.title then
-        note:add_alias(note.title)
-        note:add_alias('󱞁' .. note.title)
-      end
-
-      local out = { id = note.id, title = note.title, aliases = note.aliases, tags = note.tags, date = os.date '%Y-%m-%d' }
-
-      -- `note.metadata` contains any manually added fields in the frontmatter.
-      -- So here we just make sure those fields are kept in the frontmatter.
-      if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
-        for k, v in pairs(note.metadata) do
-          out[k] = v
+    frontmatter = {
+      func = function(note)
+        -- Add the title of the note as an alias.
+        if note.title then
+          note:add_alias(note.title)
+          note:add_alias('󱞁' .. note.title)
         end
-      end
 
-      return out
-    end,
+        local out = { id = note.id, title = note.title, aliases = note.aliases, tags = note.tags, date = os.date '%Y-%m-%d' }
+
+        -- `note.metadata` contains any manually added fields in the frontmatter.
+        -- So here we just make sure those fields are kept in the frontmatter.
+        if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+          for k, v in pairs(note.metadata) do
+            out[k] = v
+          end
+        end
+
+        return out
+      end,
+    },
     templates = {
       folder = 'Templates',
       date_format = '%Y-%m-%d',
