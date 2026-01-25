@@ -30,8 +30,8 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- vim.keymap.set('v', '<leader>d', '"_d')
 
 -- Navigate quickfix list
-vim.keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz', { desc = '[p]revious item in the quickfix list' })
-vim.keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz', { desc = '[n]ext item in the quickfix list' })
+vim.keymap.set('n', '<C-k>', '<cmd>cprev<CR>zz', { desc = '[p]revious item in the quickfix list' })
+vim.keymap.set('n', '<C-j>', '<cmd>cnext<CR>zz', { desc = '[n]ext item in the quickfix list' })
 vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz', { desc = 'next item in the location list' })
 vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz', { desc = 'previous item in the location list' })
 
