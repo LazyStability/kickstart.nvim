@@ -15,6 +15,7 @@ return {
       'vim',
       'vimdoc',
       'cpp',
+      'nix',
       'python',
       'git_config',
       'git_rebase',
