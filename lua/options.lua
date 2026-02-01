@@ -76,8 +76,6 @@ vim.o.foldcolumn = '1'
 vim.opt.foldlevelstart = 99
 vim.opt.foldcolumn = '0'
 vim.opt.foldenable = true
-vim.o.foldmethod = 'expr'
-vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()' -- Use treesitter for folding
 vim.opt.foldtext = require 'modules.foldtext'
 
 -- File handling

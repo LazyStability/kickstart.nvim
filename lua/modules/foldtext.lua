@@ -22,9 +22,7 @@ local function parse_line(linenr)
   end
 
   local tree = parser:parse({ linenr - 1, linenr })[1]
-
   local result = {}
-
   local line_pos = 0
 
   for id, node, metadata in query:iter_captures(tree:root(), 0, linenr - 1, linenr) do
@@ -34,7 +32,7 @@ local function parse_line(linenr)
     local priority = tonumber(metadata.priority or vim.highlight.priorities.treesitter)
 
     if start_row == linenr - 1 and end_row == linenr - 1 then
-      -- check for characters ignored by treesitter
+      -- check for characters ignored by treesitter (e.g. indentation or gaps)
       if start_col > line_pos then
         table.insert(result, {
           line:sub(line_pos + 1, start_col),
@@ -47,6 +45,15 @@ local function parse_line(linenr)
       local text = line:sub(start_col + 1, end_col)
       table.insert(result, { text, { { '@' .. name, priority } }, range = { start_col, end_col } })
     end
+  end
+
+  -- FIX: Append any text remaining after the last capture (e.g. semicolons, commas, or unhighlighted words)
+  if line_pos < #line then
+    table.insert(result, {
+      line:sub(line_pos + 1),
+      { { 'Folded', 0 } },
+      range = { line_pos, #line },
+    })
   end
 
   local i = 1
@@ -74,9 +81,10 @@ local function parse_line(linenr)
         end)
       end
 
-      result[i][2] = vim.tbl_map(function(tbl)
-        return tbl[1]
-      end, result[i][2])
+      -- Unpack the highlight group. nvim_buf_set_extmark/foldtext expects a string, not a list.
+      -- We take the last item because we sorted by priority ascending.
+      result[i][2] = result[i][2][#result[i][2]][1]
+
       result[i] = { result[i][1], result[i][2] }
 
       i = i + 1
@@ -105,6 +113,8 @@ function HighlightedFoldtext()
   local result2 = parse_line(vim.v.foldend)
   if result2 and #result2 > 0 then
     local first = result2[1]
+    -- Trim the whitespace from the first chunk of the end line (usually indentation)
+    -- so it sits flush against the 'lines' badge.
     result2[1] = { vim.trim(first[1]), first[2] }
     for _, item in ipairs(result2) do
       table.insert(result, item)
