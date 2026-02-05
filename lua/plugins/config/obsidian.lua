@@ -87,10 +87,23 @@ M.init = function()
     },
     callbacks = {
       enter_note = function(note)
+        vim.ui.open = (function(overridden)
+          return function(uri, opt)
+            if vim.endswith(uri, '.png') then
+              -- vim.cmd('edit ' .. uri) -- early return to just open in neovim
+              opt = { cmd = { 'imv' } } -- override open app
+              return
+            elseif vim.endswith(uri, '.pdf') then
+              opt = { cmd = { 'sioyek' } } -- override open app
+            end
+            return overridden(uri, opt)
+          end
+        end)(vim.ui.open)
         vim.keymap.set('n', '<leader>oc', '<cmd>Obsidian toggle_checkbox<cr>', {
           buffer = note.bufnr,
           desc = 'Toggle checkbox',
           --     opts = { buffer = true },
+          --
         })
       end,
     },
@@ -106,16 +119,6 @@ M.init = function()
     --     end,
     --     opts = { noremap = false, expr = true, buffer = true },
     --   },
-    -- -- Optional, by default when you use `:ObsidianFollowLink` on a link to an external
-    -- -- URL it will be ignored but you can customize this behavior here.
-    -- ---@param url string
-    follow_url_func = function(url)
-      -- Open the URL in the default web browser.
-      -- vim.fn.jobstart { 'open', url } -- Mac OS
-      -- vim.fn.jobstart({"xdg-open", url})  -- linux
-      -- vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
-      vim.ui.open(url) -- need Neovim 0.10.0+
-    end,
     -- how default frontmatter is generated
     frontmatter = {
       func = function(note)
