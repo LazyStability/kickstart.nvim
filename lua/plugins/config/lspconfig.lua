@@ -161,7 +161,7 @@ local servers = {
     cmd = { 'clangd', '--query-driver=C:/ProgramData/mingw64/mingw64/bin/c++.exe' },
   },
   gopls = {},
-  basedpyright = {},
+  ty = {},
   bashls = {},
   rust_analyzer = {},
   omnisharp = {},
