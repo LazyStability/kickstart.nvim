@@ -36,6 +36,7 @@ return { -- Autocompletion
   },
   config = function()
     require 'plugins.config.cmp'
+    require 'plugins.config.luasnip'
   end,
 }
 -- vim: ts=2 sts=2 sw=2 et
