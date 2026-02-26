@@ -270,7 +270,7 @@ local servers = {
       --   return vim.fs.root(bufnr, { '.git' }) or vim.fn.expand '%:p:h'
       -- end,
       exportPdf = 'onType',
-      outputPath = '$root/target/$dir/$name',
+      outputPath = '$dir/target/$name',
     },
   },
 }
