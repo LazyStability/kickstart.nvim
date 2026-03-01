@@ -1,75 +1,61 @@
-# kickstart.nvim
+# Neovim Nix Wrapper
 
-## Introduction
+This is a self-contained Neovim configuration wrapped in Nix, following the NWFS (Neovim Wrapper from Scratch) approach.
 
-A starting point for Neovim that is:
+## Features
 
-* Small
-* Modular
-* Completely Documented
+- Portable Neovim configuration that works on any system with Nix
+- Self-contained with all plugins and configuration
+- Independent of system Neovim configuration
+- Can be run with `nix run` or `nix build`
 
-**NOT** a Neovim distribution, but instead a starting point for your configuration.
+## Usage
 
-## Installation
-
-### Install Neovim
-
-Kickstart.nvim targets *only* the latest
-['stable'](https://github.com/neovim/neovim/releases/tag/stable) and latest
-['nightly'](https://github.com/neovim/neovim/releases/tag/nightly) of Neovim.
-If you are experiencing issues, please make sure you have the latest versions.
-
-### Install External Dependencies
-
-External Requirements:
-- Basic utils: `git`, `make`, `unzip`, C Compiler (`gcc`)
-- [ripgrep](https://github.com/BurntSushi/ripgrep#installation)
-- A [Nerd Font](https://www.nerdfonts.com/): optional, provides various icons
-  - if you have it set `vim.g.have_nerd_font` in `init.lua` to true
-- Language Setup:
-  - If want to write Typescript, you need `npm`
-  - If want to write Golang, you will need `go`
-  - etc.
-
-> **NOTE**
-> See [Install Recipes](#Install-Recipes) for additional Windows and Linux specific notes
-> and quick install snippets
-
-### Install Kickstart
-
-> **NOTE**
-> [Backup](#FAQ) your previous configuration (if any exists)
-
-Neovim's configurations are located under the following paths, depending on your OS:
-
-| OS | PATH |
-| :- | :--- |
-| Linux, MacOS | `$XDG_CONFIG_HOME/nvim`, `~/.config/nvim` |
-| Windows (cmd)| `%userprofile%\AppData\Local\nvim\` |
-| Windows (powershell)| `$env:USERPROFILE\AppData\Local\nvim\` |
-
-#### Recommended Step
-
-[Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repo
-so that you have your own copy that you can modify, then install by cloning the
-fork to your machine using one of the commands below, depending on your OS.
-
-> **NOTE**
-> Your fork's url will be something like this:
-> `https://github.com/<your_github_username>/kickstart.nvim.git`
-
-#### Clone kickstart.nvim
-> **NOTE**
-> If following the recommended step above (i.e., forking the repo), replace
-> `nvim-lua` with `<your_github_username>` in the commands below
-
-<details><summary> Linux and Mac </summary>
-
-```sh
-git clone https://github.com/LazyStability/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+### Build the package
+```bash
+nix build -f ./default.nix -o result
 ```
 
-</details>
+### Run Neovim
+```bash
+./result/bin/nvim
+```
+
+### Run with nix run (if you have a flake.nix)
+```bash
+nix run .#neovim
+```
+
+## Structure
+
+This wrapper:
+- Uses a custom `init.lua` with the configuration
+- Sets up a proper plugin structure in `packpath`
+- Uses `NVIM_APPNAME` to avoid conflicts with system Neovim
+- Wraps the original Neovim executable with our custom configuration
+
+## Building and Testing
+
+The package builds and runs successfully with:
+- Nix 2.18+
+- Neovim 0.11+
+
+The wrapper is completely self-contained and will work on any machine with Nix installed.
+
+## How it Works
+
+This implementation follows the Neovim Wrapper from Scratch (NWFS) approach described in the tutorial. It creates:
+
+1. A custom init.lua file
+2. A packpath structure that mimics Neovim's plugin directory layout
+3. A wrapper script that sets environment variables and passes the right flags to Neovim
+4. A symlinkJoin to combine everything into a single package
+
+The key insight from the tutorial is:
+- Use `--cmd 'set packpath^=...'` to tell Neovim where to find packages
+- Use `--cmd 'set runtimepath^=...'` to set runtime path
+- Set `NVIM_APPNAME` to isolate the configuration from system Neovim
+- Use `exec -a "$0"` to properly replace the wrapper process with Neovim
 
 <details><summary> Windows </summary>
 
