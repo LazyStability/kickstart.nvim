@@ -1,45 +1,105 @@
-{
-  pkgs ? import <nixpkgs> { },
-}:
+{ pkgs ? import <nixpkgs> { } }:
 
 let
-  # Import the necessary packages
+  lib = pkgs.lib;
   neovim-unwrapped = pkgs.neovim;
 
-  # Get the current directory as a path
   src = ./.;
+  packageName = "nvim-custom";
 
-  # Create a custom init.lua that will work with Nix
+  plugins = with pkgs.vimPlugins; [
+    # Completion
+    nvim-cmp
+    luasnip
+    cmp_luasnip
+    cmp-nvim-lsp
+    cmp-path
+    friendly-snippets
+
+    # Treesitter
+    nvim-treesitter
+    nvim-treesitter-context
+
+    # Fuzzy finder
+    telescope-nvim
+    plenary-nvim
+    telescope-fzf-native-nvim
+    telescope-ui-select-nvim
+
+    # LSP
+    nvim-lspconfig
+    fidget-nvim
+    neodev-nvim
+
+    # UI
+    lualine-nvim
+    nvim-web-devicons
+    gitsigns-nvim
+    tokyonight-nvim
+    which-key-nvim
+    indent-blankline-nvim
+
+    # Formatters & Linters
+    conform-nvim
+    nvim-lint
+
+    # Git
+    neogit
+    diffview-nvim
+
+    # Editor
+    undotree
+    nvim-surround
+    smart-splits-nvim
+    nvim-autopairs
+    comment-nvim
+    vimtex
+
+    # Markdown
+    obsidian-nvim
+    render-markdown-nvim
+    todo-comments-nvim
+
+    # Debug
+    nvim-dap
+    nvim-dap-ui
+    nvim-nio
+    nvim-dap-virtual-text
+
+    # Misc
+    image-nvim
+  ];
+
   initLua = pkgs.runCommandLocal "init.lua" { } ''
     cp ${src}/init.lua $out
   '';
 
-  # Create a packpath structure that follows Neovim's expected directory layout
   packpath = pkgs.runCommandLocal "packpath" { } ''
-    mkdir -p $out/pack/myconfig/{start,opt}
+    mkdir -p $out/pack/${packageName}/{start,opt}
 
-    # Copy all our config files to the pack structure
-    mkdir -p $out/pack/myconfig/start/
-    cp -r ${src}/lua $out/pack/myconfig/start/
-    cp -r ${src}/after $out/pack/myconfig/start/
-    cp -r ${src}/doc $out/pack/myconfig/start/
-    cp ${src}/init.lua $out/pack/myconfig/start/
+    ${lib.concatMapStringsSep "\n" (plugin: ''
+      ln -vsfT ${plugin} $out/pack/${packageName}/start/${lib.getName plugin}
+    '') plugins}
+
+    mkdir -p $out/pack/${packageName}/start/myconfig
+    cp -r ${src}/lua $out/pack/${packageName}/start/myconfig/
+    cp -r ${src}/after $out/pack/${packageName}/start/myconfig/
+    cp -r ${src}/doc $out/pack/${packageName}/start/myconfig/
+    cp ${src}/init.lua $out/pack/${packageName}/start/myconfig/
   '';
 
-  # Create a wrapper script with proper environment variables
   wrapper = pkgs.runCommandLocal "nvim-wrapper" { } ''
     mkdir -p $out/bin
-    cat > $out/bin/nvim << 'EOF'
+    cat > $out/bin/nvim << 'WRAPPER_EOF'
     #!${pkgs.bash}/bin/bash
-    export NVIM_APPNAME="nvim-custom"
-    exec -a "$0" ${neovim-unwrapped}/bin/nvim -u ${initLua} --cmd 'set packpath^=${packpath} | set runtimepath^=${packpath}' "$@"
-    EOF
+    export NVIM_APPNAME="${packageName}"
+    exec -a "$0" ${neovim-unwrapped}/bin/nvim -u ${initLua} --cmd "set packpath^=${packpath}" --cmd "set runtimepath^=${packpath}" "$@"
+    WRAPPER_EOF
     chmod +x $out/bin/nvim
   '';
 
-  # Create the final package
   neovim-pkg = pkgs.symlinkJoin {
-    name = "neovim-custom";
+    name = packageName;
     paths = [
       neovim-unwrapped
       packpath
