@@ -2,6 +2,9 @@
 -- local buf = vim.api.nvim_get_current_buf()
 -- vim.api.nvim_buf_set_option(buf, 'filetype', 'typst')
 
+vim.cmd 'set conceallevel=1'
+
+-- Function to create a figure from a clipboard image
 local function ScreenshotFig()
   local attachment = vim.fn.expand '<cfile>'
   if attachment == '' then
