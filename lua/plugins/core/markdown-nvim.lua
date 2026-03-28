@@ -43,6 +43,8 @@ return {
         RightArrow = { raw = '[>]', rendered = ' ', highlight = 'RenderMarkdownTodo', scope_highlight = nil },
         canceled = { raw = '[~]', rendered = '󰰱', highlight = 'RenderMarkdownTodo', scope_highlight = nil },
         important = { raw = '[!]', rendered = ' ', highlight = 'RenderMarkdownTodo', scope_highlight = nil },
+        reward = { raw = '[R]', rendered = '󰜦', highlight = 'RenderMarkdownTodo', scope_highlight = nil },
+        secret = { raw = '[f]', rendered = '󰍉', highlight = 'RenderMarkdownTodo', scope_highlight = nil },
       },
     },
   },

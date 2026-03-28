@@ -262,6 +262,7 @@ local servers = {
       },
     },
   },
+  markdown_oxide = {},
   tinymist = {
     offset_encoding = 'utf-8',
     settings = {

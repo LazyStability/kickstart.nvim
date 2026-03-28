@@ -17,6 +17,9 @@ M.init = function()
       {
         name = 'DnD',
         path = '~/Dokumente/DNDVault',
+        overrides = {
+          notes_subdir = '4-archieve',
+        },
       },
       {
         name = 'Zettelkasten',
@@ -81,7 +84,7 @@ M.init = function()
       end
       return os.date '%Y-%m-%d' .. '-' .. suffix
     end,
-    preferred_link_style = 'Markdown',
+    link = { style = 'markdown', format = 'absolute' },
     ui = {
       enable = false, -- set to false to disable all additional syntax features
     },
