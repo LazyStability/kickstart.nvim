@@ -9,7 +9,8 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', 'ZH', ':w<cr>')
 
 -- Set keymap for netrw
-vim.keymap.set('n', '<leader>F', vim.cmd.Ex, { desc = '[F]ile system mode' })
+-- vim.keymap.set('n', '<leader>F', vim.cmd.Ex, { desc = '[F]ile system mode' })
+vim.keymap.set('n', '<leader>F', '<cmd>Oil<CR>', { desc = '[F]ile system mode' })
 -- vim.keymap.set('n', '<leader>s', ':find ', { desc = '[s]earch file' })
 
 -- Set move marked lines
