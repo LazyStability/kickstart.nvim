@@ -254,7 +254,7 @@ local servers = {
           IgnoreLinkTitle = false,
         },
         diagnosticSeverity = 'hint',
-        isolateEnglish = false,
+        isolateEnglish = true,
         dialect = 'British',
         maxFileLength = 120000,
         ignoredLintsPath = '',
