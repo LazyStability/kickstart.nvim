@@ -12,7 +12,8 @@ vim.api.nvim_create_autocmd({ 'TextChanged', 'InsertLeave', 'CursorHold', 'BufEn
   buffer = bufnr,
   group = group,
   callback = function()
-    if codelens_supported(bufnr) then
+    if codelens_supported(bufnr) and vim.lsp.codelens.enable ~= nil then
+      -- vim.lsp.codelens.refresh()
       vim.lsp.codelens.enable(true, { bufnr = bufnr })
     end
   end,
